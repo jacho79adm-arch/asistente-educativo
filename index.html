@@ -1,0 +1,203 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>💬 Asistente Educativo - Copilot Studio</title>
+  <meta name="description" content="Asistente Educativo — chat integrado con Copilot Studio" />
+  <meta name="theme-color" content="#4b6cb7" />
+
+  <style>
+    :root{
+      --brand:#4b6cb7;
+      --bg-start:#d7e3fc;
+      --bg-end:#f8f9fa;
+      --text:#0f1720;
+      --muted:#444;
+      --max-width:920px;
+    }
+
+    *{box-sizing:border-box}
+    html,body{height:100%}
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: linear-gradient(90deg,var(--bg-start),var(--bg-end));
+      margin: 0;
+      color:var(--text);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    a.skip-link{
+      position:absolute;
+      left:-999px;
+      top:auto;
+      width:1px;
+      height:1px;
+      overflow:hidden;
+    }
+    a.skip-link:focus{
+      left:1rem;
+      top:1rem;
+      width:auto;
+      height:auto;
+      padding:.5rem .75rem;
+      background:#fff;
+      color:var(--brand);
+      border-radius:6px;
+      box-shadow:0 4px 16px rgba(0,0,0,.12);
+      z-index:1000;
+    }
+
+    header {
+      background-color: var(--brand);
+      color: white;
+      padding: 18px 12px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+    .container{
+      width:clamp(300px,90%,var(--max-width));
+      margin:0 auto;
+    }
+    header .container{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:1rem;
+    }
+
+    h1{margin:0;font-size:1.25rem;display:flex;align-items:center;gap:.5rem}
+    header p{margin:0;font-size:.9rem;opacity:.95}
+
+    main{padding:30px 12px 48px;}
+    .hero{max-width:800px;margin:0 auto 18px;text-align:center}
+    .hero p{margin:.6rem 0;color:var(--muted);font-size:1.05rem}
+
+    /* Wrapper to control aspect & responsiveness of iframe */
+    .iframe-wrapper{
+      margin:0 auto;
+      max-width:420px; /* controla el ancho máximo del chat embebido */
+      width:100%;
+      /* altura responsiva: hasta 80vh, pero no más de 720px y no menos de 360px */
+      height: clamp(360px, 80vh, 720px);
+      border-radius:12px;
+      overflow:hidden;
+      box-shadow: 0 8px 30px rgba(2,6,23,0.08);
+      border: 2px solid rgba(75,108,183,0.12);
+      background: white;
+      position:relative;
+    }
+
+    iframe{
+      width:100%;
+      height:100%;
+      border:0;
+      display:block;
+      background:transparent;
+    }
+
+    .iframe-fallback{
+      display:none;
+      padding:12px;
+      text-align:center;
+      background:linear-gradient(180deg,#fff,#fbfdff);
+      border-top:1px dashed rgba(0,0,0,0.04);
+    }
+
+    .note{color:var(--muted);font-size:.95rem;margin-top:.75rem;text-align:center}
+
+    footer{
+      margin-top:28px;
+      padding:14px 0;
+      background-color:var(--brand);
+      color:white;
+      font-size:.9rem;
+      text-align:center;
+    }
+
+    @media (min-width:900px){
+      .hero p{font-size:1.1rem}
+    }
+  </style>
+</head>
+<body>
+  <a class="skip-link" href="#main">Saltar al contenido</a>
+
+  <header>
+    <div class="container">
+      <div>
+        <h1>💬 Asistente Educativo</h1>
+        <p>Desarrollado con Microsoft Copilot Studio</p>
+      </div>
+      <div aria-hidden="true">
+        <!-- espacio para logo o acciones -->
+      </div>
+    </div>
+  </header>
+
+  <main id="main" class="container" role="main" aria-labelledby="title">
+    <section class="hero" aria-labelledby="title">
+      <h2 id="title" style="position:absolute;left:-999px;top:auto;height:1px;width:1px;overflow:hidden">Chat educativo</h2>
+      <p>Bienvenido al asistente virtual educativo. Aquí puedes preguntar sobre horarios, soporte o información general.</p>
+    </section>
+
+    <div class="iframe-wrapper" aria-live="polite">
+      <!-- Reemplaza src por la URL de Copilot Studio. Si el proveedor requiere atributos especiales,
+           comprueba su documentación sobre cómo generar el embed (tokens, permisos, etc.). -->
+      <iframe
+        id="copilotIframe"
+        src="https://TU-URL-DE-COPILOT-STUDIO"
+        title="Chatbot Copilot Studio"
+        aria-label="Chat educativo con Copilot Studio"
+        loading="lazy"
+        allow="microphone; camera; clipboard-read; clipboard-write; autoplay"
+      ></iframe>
+
+      <div id="fallback" class="iframe-fallback" role="status" aria-hidden="true">
+        <p style="margin:.25rem 0"><strong>No se pudo cargar el chat embebido.</strong></p>
+        <p style="margin:.25rem 0">Haz clic en el siguiente enlace para abrir el asistente en una nueva pestaña:</p>
+        <p style="margin:.5rem 0"><a id="openLink" href="https://TU-URL-DE-COPILOT-STUDIO" target="_blank" rel="noopener noreferrer">Abrir Asistente Educativo en una nueva pestaña</a></p>
+        <p style="margin:.25rem 0;color:var(--muted);font-size:.9rem">Si esto ocurre, es posible que el proveedor haya bloqueado mostrar la interfaz en iframes (X-Frame-Options o CSP).</p>
+      </div>
+    </div>
+
+    <p class="note">Nota: este formulario/iframe es un ejemplo. Para enviar mensajes o guardar datos necesitas integrar un backend o servicio autorizado.</p>
+  </main>
+
+  <footer>
+    © 2025 - Jorge Andrés Chaparro Ortiz | Institución Educativa San Francisco Javier - Yumbo
+  </footer>
+
+  <script>
+    (function(){
+      const iframe = document.getElementById('copilotIframe');
+      const fallback = document.getElementById('fallback');
+
+      // Si el iframe no dispara 'load' en X ms asumimos que está bloqueado o tardando demasiado
+      const TIMEOUT_MS = 6000;
+      let loaded = false;
+
+      const t = setTimeout(() => {
+        if (!loaded) {
+          fallback.style.display = 'block';
+          fallback.setAttribute('aria-hidden', 'false');
+        }
+      }, TIMEOUT_MS);
+
+      iframe.addEventListener('load', () => {
+        loaded = true;
+        clearTimeout(t);
+        // ocultar fallback por si quedó visible
+        fallback.style.display = 'none';
+        fallback.setAttribute('aria-hidden', 'true');
+      });
+
+      // Si prefieres, actualiza el href del enlace de fallback dinámicamente desde el src del iframe
+      const openLink = document.getElementById('openLink');
+      if (openLink && iframe.src) {
+        openLink.href = iframe.src;
+      }
+    })();
+  </script>
+</body>
+</html>
