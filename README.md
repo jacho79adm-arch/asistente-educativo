@@ -1,4 +1,3 @@
-```markdown
 # Asistente Educativo — Sitio con Copilot Studio
 
 Página de ejemplo que integra un chat embebido de Microsoft Copilot Studio con fallback
@@ -30,4 +29,3 @@ Instrucciones rápidas para inicializar el repositorio (si prefieres usar la ter
 Notas importantes:
 - Reemplaza `https://TU-URL-DE-COPILOT-STUDIO` en `index.html` por la URL de embed que te proporcione Copilot Studio.
 - Si al cargar la página aparece el fallback, es probable que el proveedor impida embeds (X-Frame-Options / CSP) — en ese caso usa el enlace para abrir el asistente en una nueva pestaña o revisa la documentación del proveedor para integraciones oficiales.
-```
